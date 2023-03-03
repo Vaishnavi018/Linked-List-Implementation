@@ -101,6 +101,18 @@ void delete_last() {
     free(temp);
 }
 
+// find middle element 
+void middle_element(struct node *head) {
+    struct node *ptr = head; 
+    int len = length(head);
+    
+    for (int i=1; i <= len/2; i++)
+        ptr = ptr -> next;
+    
+    cout <<"the middle element is "<<ptr -> data << endl;
+    
+}
+
 //main function
 int main() {
 	insert_front(98);
@@ -109,6 +121,7 @@ int main() {
 	insert_front(81);
 	display (head);
 	length(head);
+	middle_element(head);
 	display_last(head);
 	second_last(head);
 	delete_first();
