@@ -1,0 +1,119 @@
+//operations on linked list 
+#include <iostream>
+using namespace std;
+
+//creating a node 
+struct node {
+    int data;
+    struct node *next;
+};
+
+//starting point head
+struct node* head = NULL;
+
+//Insert element at last 
+void insert_last(int item){
+    struct node *temp = (struct node *) malloc (sizeof(struct node *));
+    temp -> data = item;
+    temp -> next = NULL;
+    
+    if(head == NULL){
+        head = temp;
+    }
+    else {
+        struct node* ptr = head;
+        
+        while(ptr -> next != NULL)
+            ptr = ptr->next;
+        ptr -> next = temp;
+    }
+}
+
+//insert element at front 
+void insert_front(int item) {
+    struct node *temp = (struct node *) malloc (sizeof(struct node *));
+    if( temp != NULL){
+        temp -> data = item;
+        temp -> next = head;
+        head = temp;
+    }
+}
+
+//display the data values of linked list 
+void display(struct node *head) {
+    struct node *n = head;
+    while (n != NULL)
+       { cout << n-> data;
+        cout<<"->";
+        n = n-> next;}
+    cout << "NULL"<<endl;
+}
+
+//find length of linked list  
+int length(struct node *head) {
+    int count = 0;
+    struct node *ptr = head;
+    while (ptr != NULL)
+    {
+        ptr = ptr -> next;
+        count ++;
+    }
+    cout << "The length of linked list is " <<count <<endl;
+    return count;
+}
+
+//display data of last node 
+void display_last(struct node *head) {
+    struct node *ptr = head;
+    while ( ptr -> next != NULL)
+        ptr = ptr -> next;
+    cout << "Last element of linked list "<< ptr-> data<<endl;
+}
+
+// display second last element data
+void second_last ( struct node *head) {
+    struct node *ptr = head;
+    while (ptr -> next -> next != NULL)
+        ptr = ptr -> next;
+    cout << "Second last element of linked list "<< ptr -> data<< endl;
+}
+
+//delete element from starting 
+void delete_first() {
+    struct node *ptr = head;
+    
+    head = ptr -> next;
+    ptr -> next = NULL;
+    free(ptr);
+}
+
+//delete elements from last of linked list
+void delete_last() {
+    struct node *temp;
+    struct node *ptr = head;
+    int len = length(head);
+    
+    for (int i=1; i<= len -2; i++){
+        ptr = ptr-> next;
+    }
+    temp = ptr -> next;
+    ptr -> next = NULL;
+    free(temp);
+}
+
+//main function
+int main() {
+	insert_front(98);
+	insert_front(22);
+	insert_last(57);
+	insert_front(81);
+	display (head);
+	length(head);
+	display_last(head);
+	second_last(head);
+	delete_first();
+	display(head);
+	delete_last();
+	display(head);
+	return 0;
+}
